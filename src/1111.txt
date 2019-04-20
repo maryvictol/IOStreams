@@ -1,20 +1,15 @@
 public void readFile(String fileName) {
+                   BufferedInputStream inputFile;
+                   Pattern pattern = Pattern.compile(keyWords);
+                   try {
+                       inputFile = new BufferedInputStream(new FileInputStream(fileName));
+                       int bytesAvailable;
+                       StringBuffer stringFromInputFile = new StringBuffer();
 
-        BufferedInputStream inputFile;
-        Pattern pattern = Pattern.compile(keyWords);
-
-        try {
-            inputFile = new BufferedInputStream(new FileInputStream(fileName));
-            int bytesAvailable;
-            StringBuffer stringFromInputFile = new StringBuffer();
-
-            while ((bytesAvailable = inputFile.read()) != -1) {
-                stringFromInputFile.append((char) bytesAvailable);
-            }
-        } catch (FileNotFoundException e) {
+                       while ((bytesAvailable = inputFile.read()) != -1) {
+                           stringFromInputFile.append((char) bytesAvailable);
+                       }
+                   } catch (FileNotFoundException e) {
             System.out.println("File " + fileName + " isn't found");
-
-
         }
     }
-

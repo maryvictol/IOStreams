@@ -1,0 +1,1 @@
+public void readFile(String fileName) {BufferedInputStream inputFile; Pattern pattern = Pattern.compile(keyWords); try

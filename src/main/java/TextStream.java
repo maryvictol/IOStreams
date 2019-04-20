@@ -5,13 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextStream {
-    public String keyWords = "abstract|boolean|break|byte|byvalue|case|cast|catch|char|class|const|continue|default|do|double|" +
-            "else|extends|false|final|finally|float|for|future|generic|goto|if|implements|import|inner|instanceof|" +
-            "int|interface|long|native|new|null|operator|outer|package|private|protected|public|rest|return|short|" +
-            "static|super|switch|syncronized|this|throw|throws|transient|true|try|var|void|volatile|while";
 
-    public StringBuilder readTextStream(String fileName) {
-        StringBuilder stringFromInputFile = new StringBuilder();
+    private TextStream() {};
+
+    public static StringBuffer readTextStream(String fileName) throws IOException{
+        StringBuffer stringFromInputFile = new StringBuffer();
         try (BufferedReader inputFile =
                      new BufferedReader(new FileReader(fileName))) {
             String charsAvailable;
@@ -28,21 +26,7 @@ public class TextStream {
         return stringFromInputFile;
     }
 
-    public String analyzeString(StringBuilder resultString) {
-        Pattern pattern = Pattern.compile(keyWords);
-        String stringFromBuffer= "";
-        int count = 0;
-
-        Matcher m = pattern.matcher(resultString);
-        while (m.find()) {
-            stringFromBuffer += (m.group() + " ");
-            count++;
-        }
-
-        return stringFromBuffer + "\n Найдено ключевых слов: " + count;
-    }
-
-    public void writeTextStream(String resultString, String keyWordsFileName) {
+    public static void writeTextStream(String resultString, String keyWordsFileName) throws IOException{
         try (BufferedWriter keyWordsFile =
                      new BufferedWriter(new FileWriter(keyWordsFileName))) {
             keyWordsFile.write(resultString);
